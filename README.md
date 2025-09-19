@@ -1,4 +1,4 @@
-# Golf-Handicap-Calculator-With-Spring-Boot
+# Golf Handicap Calculator With Spring Boot
 
 ## Introduction
 
