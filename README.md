@@ -76,10 +76,10 @@ DevOps/Product Owner/Scrum Master/Github Admin: Aiden Hartranft
 
 ## Milestones
 
+[Milestone 1](https://google.com)
 [Milestone 2](https://google.com)
-[Milestone 2](https://google.com)
-[Milestone 2](https://google.com)
-[Milestone 2](https://google.com)s
+[Milestone 3](https://google.com)
+[Milestone 4](https://google.com)
 
 ## Standup
 
