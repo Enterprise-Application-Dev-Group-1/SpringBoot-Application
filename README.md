@@ -43,7 +43,7 @@ https://github.com/orgs/Enterprise-Application-Dev-Group-1/projects/1/views/1
 
 ## Class Diagram
 
-![Golf Handicap Calculator Class Diagram] (https://google.com)
+![Golf Handicap Calculator Class Diagram](https://google.com)
 
 ### Class Diagram Description
 
