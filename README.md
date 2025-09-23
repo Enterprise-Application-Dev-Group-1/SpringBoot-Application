@@ -1,5 +1,6 @@
 # Golf Handicap Calculator With Spring Boot
 
+
 ## Introduction
 
 This application allows golfers to keep track of their handicap and past rounds played. After a round of golf they can
@@ -10,7 +11,9 @@ a set of RESTful service endpoints, or a simple UI, or both.
 ## Storyboard
 
 https://github.com/orgs/Enterprise-Application-Dev-Group-1/projects/1/views/1
+
 ![image alt](https://github.com/Enterprise-Application-Dev-Group-1/SpringBoot-Application/blob/6cfc494cc0bc8b551edfec34ade3a06a1e54522c/Design%20Doc_StoryBoard.JPG)
+
 
 ## Requirements
 
@@ -45,6 +48,7 @@ https://github.com/orgs/Enterprise-Application-Dev-Group-1/projects/1/views/1
 ## Class Diagram
 
 ![Golf Handicap Calculator Class Diagram](https://google.com)
+
 
 ### Class Diagram Description
 
@@ -81,6 +85,7 @@ DevOps/Product Owner/Scrum Master/Github Admin: Aiden Hartranft
 [Milestone 2](https://google.com)
 [Milestone 3](https://google.com)
 [Milestone 4](https://google.com)
+
 
 ## Standup
 
