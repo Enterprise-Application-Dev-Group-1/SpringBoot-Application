@@ -12,9 +12,6 @@ a set of RESTful service endpoints, or a simple UI, or both.
 
 https://github.com/orgs/Enterprise-Application-Dev-Group-1/projects/1/views/1
 
-![image alt](https://github.com/Enterprise-Application-Dev-Group-1/SpringBoot-Application/blob/6cfc494cc0bc8b551edfec34ade3a06a1e54522c/Design%20Doc_StoryBoard.JPG)
-
-
 ## Requirements
 
 1. As a golfer, I want to be able to track my round scores, so I can see what my current handicap is.
@@ -47,7 +44,7 @@ https://github.com/orgs/Enterprise-Application-Dev-Group-1/projects/1/views/1
 
 ## Class Diagram
 
-![Golf Handicap Calculator Class Diagram](https://google.com)
+![Golf Handicap Calculator Class Diagram](https://github.com/Enterprise-Application-Dev-Group-1/SpringBoot-Application/blob/main/GolfHandicapClassDiagram.drawio.png)
 
 
 ### Class Diagram Description
