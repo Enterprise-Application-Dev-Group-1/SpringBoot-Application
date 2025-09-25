@@ -18,13 +18,15 @@ a set of RESTful service endpoints, or a simple UI, or both.
 
 ### Example
 
-**Given**: The option to input the par and score for the round
+**Given**: The option to input the par score and slope for the round
 
 **When**: The user/service inputs 72 for the course par
 
 **When**: The user/service inputs 89 for their score
 
-**Then**: The user's/service's score of 89 over the par of 72 will be saved.
+**WHNE**: The user/service inputs 121 for the slope
+
+**Then**: The user's/service's score of 89 over the par of 72 and slope of 121 will be saved.
 
 ### Example
 
@@ -32,7 +34,7 @@ a set of RESTful service endpoints, or a simple UI, or both.
 
 **When**: The user/service requests their handicap
 
-**Then**: The user's/service's handicap will be provided
+**Then**: The user's/service's handicap will be displayed
 
 ### Example
 
@@ -40,7 +42,15 @@ a set of RESTful service endpoints, or a simple UI, or both.
 
 **When**: The user/service requests their handicap
 
-**Then**: The user's/service's handicap will display how many more rounds need to be registered to calculate the handicap
+**Then**: The user's/service's handicap will display how many more rounds need to be registered to calculate the handicap (1)
+
+### Example
+
+***Given***: The user/service has 3 previous rounds played
+
+***When***: The user/service request their handicap
+
+***Then***: The user's/service's handicap will be displayed
 
 ## Buisness Logic
 
