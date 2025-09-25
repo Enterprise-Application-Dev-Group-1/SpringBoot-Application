@@ -10,7 +10,7 @@ a set of RESTful service endpoints, or a simple UI, or both.
 
 ## Storyboard
 
-https://github.com/orgs/Enterprise-Application-Dev-Group-1/projects/1/views/1
+
 
 ## Requirements
 
@@ -70,6 +70,33 @@ Score Differential = ((strokes - par) * 113)/course_slope
 
 ![Golf Handicap Calculator Class Diagram](https://github.com/Enterprise-Application-Dev-Group-1/SpringBoot-Application/blob/main/GolfHandicapClassDiagram.drawio.png)
 
+- **EnterpriseApplication**  
+  Spring Boot entry point to launch the application.  
+
+- **GolfHandicapController**  
+  Exposes REST endpoints for managing players, scores, and handicap calculations. Uses the service layer.  
+
+- **IPlayerServices (interface)**  
+  Defines methods for saving players/scores and calculating handicaps.  
+
+- **PlayerService (class)**  
+  Implements `IPlayerServices` with real business logic. Uses DAO layer.  
+
+- **PlayerServiceStub (class)**  
+  Test/mock implementation of `IPlayerServices` for development or unit testing.  
+
+- **IPlayerDAO (interface)**  
+  Defines data access methods for player persistence.  
+
+- **IScoreDAO (interface)**  
+  Defines data access methods for score persistence.  
+
+- **Player (DTO)**  
+  Data object representing a golfer, including ID, name, and handicap.  
+
+- **Score (DTO)**  
+  Data object representing a single round, including score, par, slope, and associated player.  
+
 
 ### Class Diagram Description
 
@@ -94,6 +121,10 @@ UI Specialist: Nirupama Poojari
 Business Logic/Persistence: Nick Turner
 DevOps/Product Owner/Scrum Master/Github Admin: Aiden Hartranft
 
+## Github Projects Kanban Board
+
+https://github.com/orgs/Enterprise-Application-Dev-Group-1/projects/1/views/1
+
 ## Milestones
 
 [Milestone 1](https://github.com/Enterprise-Application-Dev-Group-1/SpringBoot-Application/milestone/1)
@@ -104,5 +135,5 @@ DevOps/Product Owner/Scrum Master/Github Admin: Aiden Hartranft
 
 ## Standup
 
-[We meet 5:00 PM Eastern on Thursdays](https://google.com)
+[We meet 8:00 PM Eastern on Sundays](https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fl%2Fmeetup-join%2F19%3Ameeting_YTE0YTVmNTAtODVkYS00MDBmLTk5YWMtMjUxNTllMDRiY2Zh%40thread.v2%2F0%3Fcontext%3D%257b%2522Tid%2522%253a%2522f5222e6c-5fc6-48eb-8f03-73db18203b63%2522%252c%2522Oid%2522%253a%2522e3dd5340-4b1b-4344-8d9c-b206108a8a64%2522%257d%26anon%3Dtrue&type=meetup-join&deeplinkId=0be347a4-9a73-4f0f-956f-6f5c9cfd85e1&directDl=true&msLaunch=true&enableMobilePage=true&suppressPrompt=true)
 
