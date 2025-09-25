@@ -36,11 +36,16 @@ https://github.com/orgs/Enterprise-Application-Dev-Group-1/projects/1/views/1
 
 ### Example
 
-**Given**: The user/service has 15 previous rounds registered
+**Given**: The user/service has 2 previous rounds registered
 
 **When**: The user/service requests their handicap
 
 **Then**: The user's/service's handicap will display how many more rounds need to be registered to calculate the handicap
+
+## Buisness Logic
+
+
+
 
 ## Class Diagram
 
@@ -57,12 +62,6 @@ https://github.com/orgs/Enterprise-Application-Dev-Group-1/projects/1/views/1
 >       "name":{
 >           "type":"string"
 >       },
->       "pars": {
->           "type":"integer array"
->       }
->       "scores": {
->           "type":"integer array"
->       },
 >       "handicap":{
 >           "type":"integer"
 >       }
@@ -78,7 +77,7 @@ DevOps/Product Owner/Scrum Master/Github Admin: Aiden Hartranft
 
 ## Milestones
 
-[Milestone 1](https://google.com)
+[Milestone 1](https://github.com/Enterprise-Application-Dev-Group-1/SpringBoot-Application/milestone/1)
 [Milestone 2](https://google.com)
 [Milestone 3](https://google.com)
 [Milestone 4](https://google.com)
