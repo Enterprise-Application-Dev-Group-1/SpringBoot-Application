@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Golf Handicap Calculator</title>
+    <link rel="stylesheet" href="/golf-handicap.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Golf Handicap Calculator</h1>
+        <form action="/calculate-handicap" method="post">
+            <label>Enter your last 20 outing scores:</label><br>
+            <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                <div>
+                    <label>Scores</label><br>
+                    <input type="number" name="scores" min="1" max="200" required><br>
+                    <input type="number" name="scores" min="1" max="200" required><br>
+                    <input type="number" name="scores" min="1" max="200" required><br>
+                    <input type="number" name="scores" min="1" max="200" required><br>
+                    <input type="number" name="scores" min="1" max="200" required><br>
+                    <input type="number" name="scores" min="1" max="200" required><br>
+                    <input type="number" name="scores" min="1" max="200" required><br>
+                    <input type="number" name="scores" min="1" max="200" required><br>
+                    <input type="number" name="scores" min="1" max="200" required><br>
+                    <input type="number" name="scores" min="1" max="200" required><br>
+                </div>
+                <div>
+                    <label>Course Pars</label><br>
+                    <input type="number" name="pars" min="1" max="100" required><br>
+                    <input type="number" name="pars" min="1" max="100" required><br>
+                    <input type="number" name="pars" min="1" max="100" required><br>
+                    <input type="number" name="pars" min="1" max="100" required><br>
+                    <input type="number" name="pars" min="1" max="100" required><br>
+                    <input type="number" name="pars" min="1" max="100" required><br>
+                    <input type="number" name="pars" min="1" max="100" required><br>
+                    <input type="number" name="pars" min="1" max="100" required><br>
+                    <input type="number" name="pars" min="1" max="100" required><br>
+                    <input type="number" name="pars" min="1" max="100" required><br>
+                </div>
+            </div>
+            <button type="submit" style="margin-top:20px;">Calculate Handicap</button>
+        </form>
+        <div class="result">
+            <!-- Result will be displayed here -->
+            <p th:if="${handicap != null}">Your calculated handicap: <span th:text="${handicap}"></span></p>
+        </div>
+    </div>
+</body>
+</html>
