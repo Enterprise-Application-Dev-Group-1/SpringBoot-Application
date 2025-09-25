@@ -44,8 +44,27 @@ https://github.com/orgs/Enterprise-Application-Dev-Group-1/projects/1/views/1
 
 ## Buisness Logic
 
+![Golf Handicap Calculator USGA](https://github.com/Enterprise-Application-Dev-Group-1/SpringBoot-Application/blob/main/image.png)
 
+This table provides the logic behind calculating handicap based on the USGA Rules.
 
+To calculate the score differentials we need three things from the user to input for each round tracked.
+
+- strokes (number of swings): int (ex: 89)
+- par (number of strokes to achieve par for the course): int (ex: 72)
+- course_slope (number representation of course relitive difficulty; range 55-155; 113 baseline): int (ex: 121)
+
+Formula to calculate the differential:
+
+Score Differential = ((strokes - par) * 113)/course_slope
+
+### Example:
+
+((89 - 72) * 113)/121 = +15.87
+
+### Notes
+- The course slope can be left empty, while this can lead to an inaccurate handicap, it will default to 113 since that is the baseline slope of golf courses.
+- Handicaps can be negitive (strokes < par).
 
 ## Class Diagram
 
