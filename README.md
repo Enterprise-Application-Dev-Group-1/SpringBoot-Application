@@ -10,7 +10,7 @@ a set of RESTful service endpoints, or a simple UI, or both.
 
 ## Storyboard
 
-
+![Golf Handicap Calculator Storyboard](https://github.com/Enterprise-Application-Dev-Group-1/SpringBoot-Application/blob/c27ed96bb3b916bf5a560b62b0a24986a9711917/Design%20Doc_StoryBoard.JPG)
 
 ## Requirements
 
