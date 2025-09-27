@@ -20,7 +20,7 @@ The following images for the storyboard can be changed over time to satisfy the 
 
 ![Golf Handicap Calculator Storyboard part 4](https://github.com/Enterprise-Application-Dev-Group-1/SpringBoot-Application/blob/3e504da65ca6e4d235b4112bca8a1f8016d3ffc8/Group1_DesignDocu_Storyboard_part4.JPG)
 
-![Golf Handicap Calculator Storyboard part 5](https://github.com/Enterprise-Application-Dev-Group-1/SpringBoot-Application/blob/3e504da65ca6e4d235b4112bca8a1f8016d3ffc8/Group1_DesignDocu_Storyboard_part5.JPG))
+![Golf Handicap Calculator Storyboard part 5](https://github.com/Enterprise-Application-Dev-Group-1/SpringBoot-Application/blob/3e504da65ca6e4d235b4112bca8a1f8016d3ffc8/Group1_DesignDocu_Storyboard_part5.JPG)
 
 ## Requirements
 
