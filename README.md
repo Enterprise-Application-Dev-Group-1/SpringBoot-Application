@@ -141,6 +141,10 @@ UI Specialist: Nirupama Poojari
 Business Logic/Persistence: Nick Turner
 DevOps/Product Owner/Scrum Master/Github Admin: Aiden Hartranft
 
+## Github Project link
+
+Project link: https://github.com/Enterprise-Application-Dev-Group-1/SpringBoot-Application
+
 ## Github Projects Kanban Board
 
 https://github.com/orgs/Enterprise-Application-Dev-Group-1/projects/1/views/1
