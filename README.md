@@ -140,6 +140,7 @@ Score Differential = ((strokes - par) * 113)/course_slope
 UI Specialist: Nirupama Poojari
 Business Logic/Persistence: Nick Turner
 DevOps/Product Owner/Scrum Master/Github Admin: Aiden Hartranft
+Backend/Persistence: Craig Blanding
 
 ## Github Project link
 
