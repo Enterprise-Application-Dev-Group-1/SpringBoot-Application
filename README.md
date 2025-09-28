@@ -90,6 +90,7 @@ Score Differential = ((strokes - par) * 113)/course_slope
 
 ![Golf Handicap Calculator Class Diagram](https://github.com/Enterprise-Application-Dev-Group-1/SpringBoot-Application/blob/main/GolfHandicapClassDiagram.drawio.png)
 
+### Class Diagram Description
 - **EnterpriseApplication**  
   Spring Boot entry point to launch the application.  
 
@@ -116,9 +117,6 @@ Score Differential = ((strokes - par) * 113)/course_slope
 
 - **Score (DTO)**  
   Data object representing a single round, including score, par, slope, and associated player.  
-
-
-### Class Diagram Description
 
 ## JSON Schema
 
