@@ -1,4 +1,4 @@
-package org.example;
+package com.golfhandicapcalculator.enterprise.enterprise;
 
 import com.jayway.restassured.RestAssured;
 import org.junit.Before;
