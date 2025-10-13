@@ -1,4 +1,4 @@
-package org.example;
+package com.golfhandicapcalculator.enterprise;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
