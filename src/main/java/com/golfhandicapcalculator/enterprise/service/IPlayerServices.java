@@ -10,11 +10,13 @@ public interface IPlayerServices {
 
     List<Player> getAllPlayers();
 
-    Player getPlayerById(Long playerId);
+    Player getPlayerById(Long playerId) throws IOException;
 
     Player createPlayer(Player player);
 
     Player updatePlayer(Long playerId, Player player);
+
+    double getPlayerHandicap(Long playerId);
 
     void deletePlayer(Long playerId);
 

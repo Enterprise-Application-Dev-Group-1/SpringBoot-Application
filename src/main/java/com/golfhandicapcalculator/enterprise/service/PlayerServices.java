@@ -6,29 +6,28 @@ import com.golfhandicapcalculator.enterprise.dto.Player;
 import com.golfhandicapcalculator.enterprise.dto.Score;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
+@Service
+@CacheConfig(cacheNames = {"player", "handicap"})
+@Transactional(readOnly = true)
 public class PlayerServices implements IPlayerServices {
 
-    @Autowired
-    private IPlayerDAO playerDAO;
+    private final IPlayerDAO playerDAO;
+    private final IScoreDAO scoreDAO;
 
     @Autowired
-    private IScoreDAO scoreDAO;
-
-    public PlayerServices() {}
-
-    public PlayerServices(IPlayerDAO playerDAO){
+    public PlayerServices(IPlayerDAO playerDAO, IScoreDAO scoreDAO) {
         this.playerDAO = playerDAO;
+        this.scoreDAO = scoreDAO;
     }
 
     @Override
@@ -37,26 +36,35 @@ public class PlayerServices implements IPlayerServices {
     }
 
     @Override
-    @CacheEvict(value = "player", key = "#playerId")
-    public Player getPlayerById(Long playerId) {
+    @Cacheable(key = "#playerId")
+    public Player getPlayerById(Long playerId) throws IOException {
         return playerDAO.getPlayerById(playerId);
     }
 
     @Override
-    @CacheEvict(value = "player", key = "#playerId")
+    @Transactional
+    @CachePut(key = "#result.id")
     public Player createPlayer(Player player) {
         return playerDAO.createPlayer(player);
     }
 
     @Override
-    @CacheEvict(value = "player", key = "#playerId")
+    @Transactional
+    @CachePut(key = "#playerId")
     public Player updatePlayer(Long playerId, Player player) {
         return playerDAO.updatePlayer(playerId, player);
     }
 
     @Override
-    @CacheEvict(value = "player", key = "#playerId")
-    public void deletePlayer(Long playerId){
+    @Cacheable(cacheNames = "handicap", key = "#playerId")
+    public double getPlayerHandicap(Long playerId) {
+        return playerDAO.getHandicap(playerId);
+    }
+
+    @Override
+    @Transactional
+    @CacheEvict(key = "#playerId")
+    public void deletePlayer(Long playerId) {
         playerDAO.deletePlayer(playerId);
     }
 
@@ -66,13 +74,15 @@ public class PlayerServices implements IPlayerServices {
     }
 
     @Override
-    @CacheEvict(value = "player", key = "#playerId")
+    @Transactional
+    @CacheEvict(key = "#playerId")
     public Score addScoreToPlayer(Long playerId, Score score) throws IOException {
         return scoreDAO.addScoreToPlayer(playerId, score);
     }
 
     @Override
-    @CacheEvict(value = "player", key = "#playerId")
+    @Transactional
+    @CacheEvict(key = "#playerId")
     public Score updatePlayerScore(Long playerId, Long scoreId, Score score) throws IOException {
         return scoreDAO.updatePlayerScore(playerId, scoreId, score);
     }
