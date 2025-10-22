@@ -1,4 +1,4 @@
-package com.golfhandicapcalculator.enterprise.enterprise;
+package com.golfhandicapcalculator.enterprise;
 
 import org.springframework.boot.test.context.SpringBootTest;
 
