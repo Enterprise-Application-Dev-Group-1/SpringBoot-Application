@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 public class Player {
     // Getters and Setters
-    private int playerId;
+    private Long playerId;
     private String name;
     private double handicap;
 

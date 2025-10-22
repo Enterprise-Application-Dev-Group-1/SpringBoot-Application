@@ -1,20 +1,17 @@
 package com.golfhandicapcalculator.enterprise.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class Score {
-    private int playerId;
+    @Setter
+    @Getter
+    private Long playerId;
     private int score;
     private int par;
-    private int scoreId;
+    private Long scoreId;
     private int slope;
 
-
-    public int getPlayerId() {
-        return playerId;
-    }
-
-    public void setPlayerId(int playerId) {
-        this.playerId = playerId;
-    }
 
     public int getScore() {
         return score;
@@ -32,11 +29,11 @@ public class Score {
         this.par = par;
     }
 
-    public int getScoreId() {
+    public Long getScoreId() {
         return scoreId;
     }
 
-    public void setScoreId(int scoreId) {
+    public void setScoreId(Long scoreId) {
         this.scoreId = scoreId;
     }
 
