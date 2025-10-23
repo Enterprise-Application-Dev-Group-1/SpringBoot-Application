@@ -8,22 +8,28 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class GolfHandicapController {
+
     @GetMapping("/golf-handicap")
     public String showForm() {
-        return "golf-handicap";
+        return "golf-handicap"; // This must match the HTML file name in /templates
     }
 
     @PostMapping("/calculate-handicap")
     public String calculateHandicap(@RequestParam("scores") double[] scores,
                                     @RequestParam("pars") double[] pars,
                                     Model model) {
-        double totalHandicap = 0;
-        int count = Math.min(scores.length, pars.length);
-        for (int i = 0; i < count; i++) {
-            totalHandicap += (scores[i] - pars[i]);
+        if (scores.length != 10 || pars.length != 10) {
+            model.addAttribute("error", "Please enter exactly 10 scores and 10 pars.");
+            return "golf-handicap";
         }
-        Double handicap = count > 0 ? totalHandicap / count : null;
-        model.addAttribute("handicap", handicap);
+
+        double total = 0;
+        for (int i = 0; i < 10; i++) {
+            total += (scores[i] - pars[i]);
+        }
+
+        double handicap = total / 10.0;
+        model.addAttribute("handicap", String.format("%.2f", handicap));
         return "golf-handicap";
     }
 }
