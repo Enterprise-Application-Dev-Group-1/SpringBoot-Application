@@ -13,7 +13,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -32,33 +31,28 @@ public class PlayerServices implements IPlayerServices {
 
     @Override
     public List<Player> getAllPlayers() {
-        return playerDAO.getAllPlayers();
+        return playerDAO.fetchAllPlayers();
     }
 
     @Override
     @Cacheable(key = "#playerId")
-    public Player getPlayerById(Long playerId) throws IOException {
-        return playerDAO.getPlayerById(playerId);
+    public Player getPlayerById(Long playerId) {
+        return playerDAO.fetchPlayer(playerId);
     }
 
     @Override
     @Transactional
-    @CachePut(key = "#result.id")
+    @CachePut(key = "#result.playerId")
     public Player createPlayer(Player player) {
-        return playerDAO.createPlayer(player);
+        return playerDAO.savePlayer(player);
     }
 
     @Override
     @Transactional
     @CachePut(key = "#playerId")
     public Player updatePlayer(Long playerId, Player player) {
-        return playerDAO.updatePlayer(playerId, player);
-    }
-
-    @Override
-    @Cacheable(cacheNames = "handicap", key = "#playerId")
-    public double getPlayerHandicap(Long playerId) {
-        return playerDAO.getHandicap(playerId);
+        player.setPlayerId(playerId);
+        return playerDAO.updatePlayer(player);
     }
 
     @Override
@@ -70,21 +64,24 @@ public class PlayerServices implements IPlayerServices {
 
     @Override
     public List<Score> getPlayerScores(Long playerId) {
-        return scoreDAO.getScoresByPlayerId(playerId);
+        return scoreDAO.fetchScoresByPlayerId(playerId);
     }
 
     @Override
     @Transactional
     @CacheEvict(key = "#playerId")
-    public Score addScoreToPlayer(Long playerId, Score score) throws IOException {
-        return scoreDAO.addScoreToPlayer(playerId, score);
+    public Score addScoreToPlayer(Long playerId, Score score) {
+        score.setPlayerId(playerId);
+        return scoreDAO.saveScore(score);
     }
 
     @Override
     @Transactional
     @CacheEvict(key = "#playerId")
-    public Score updatePlayerScore(Long playerId, Long scoreId, Score score) throws IOException {
-        return scoreDAO.updatePlayerScore(playerId, scoreId, score);
+    public Score updatePlayerScore(Long playerId, Long scoreId, Score score) {
+        score.setPlayerId(playerId);
+        score.setScoreId(scoreId);
+        return scoreDAO.updateScore(score);
     }
 
 }

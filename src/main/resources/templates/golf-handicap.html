@@ -1,49 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <title>Golf Handicap Calculator</title>
-    <link rel="stylesheet" href="/golf-handicap.css">
+    <link rel="stylesheet" th:href="@{/golf-handicap.css}">
 </head>
 <body>
     <div class="container">
         <h1>Golf Handicap Calculator</h1>
-        <form action="/calculate-handicap" method="post">
-            <label>Enter your last 20 outing scores:</label><br>
-            <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                <div>
-                    <label>Scores</label><br>
-                    <input type="number" name="scores" min="1" max="200" required><br>
-                    <input type="number" name="scores" min="1" max="200" required><br>
-                    <input type="number" name="scores" min="1" max="200" required><br>
-                    <input type="number" name="scores" min="1" max="200" required><br>
-                    <input type="number" name="scores" min="1" max="200" required><br>
-                    <input type="number" name="scores" min="1" max="200" required><br>
-                    <input type="number" name="scores" min="1" max="200" required><br>
-                    <input type="number" name="scores" min="1" max="200" required><br>
-                    <input type="number" name="scores" min="1" max="200" required><br>
-                    <input type="number" name="scores" min="1" max="200" required><br>
-                </div>
-                <div>
-                    <label>Course Pars</label><br>
-                    <input type="number" name="pars" min="1" max="100" required><br>
-                    <input type="number" name="pars" min="1" max="100" required><br>
-                    <input type="number" name="pars" min="1" max="100" required><br>
-                    <input type="number" name="pars" min="1" max="100" required><br>
-                    <input type="number" name="pars" min="1" max="100" required><br>
-                    <input type="number" name="pars" min="1" max="100" required><br>
-                    <input type="number" name="pars" min="1" max="100" required><br>
-                    <input type="number" name="pars" min="1" max="100" required><br>
-                    <input type="number" name="pars" min="1" max="100" required><br>
-                    <input type="number" name="pars" min="1" max="100" required><br>
+
+        <form th:action="@{/api/calculate-handicap}" method="post" class="handicap-form">
+            <div class="round-inputs" id="roundInputs">
+                <div class="round">
+                    <h3>Round 1</h3>
+                    <div class="input-group">
+                        <label>Score:</label>
+                        <input type="number" name="scores" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Par:</label>
+                        <input type="number" name="pars" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Slope Rating:</label>
+                        <input type="number" name="slopes" min="55" max="155">
+                    </div>
                 </div>
             </div>
-            <button type="submit" style="margin-top:20px;">Calculate Handicap</button>
+
+            <button type="button" onclick="addRound()" class="btn-add">Add Another Round</button>
+            <button type="submit" class="btn-calculate">Calculate Handicap</button>
         </form>
-        <div class="result">
-            <!-- Result will be displayed here -->
-            <p th:if="${handicap != null}">Your calculated handicap: <span th:text="${handicap}"></span></p>
+
+        <div th:if="${handicap != null}" class="result">
+            <h2>Your Handicap Index:</h2>
+            <p class="handicap-value" th:text="${handicap}"></p>
         </div>
     </div>
+
+    <script>
+        function addRound() {
+            const container = document.getElementById('roundInputs');
+            const roundCount = container.children.length + 1;
+
+            const roundDiv = document.createElement('div');
+            roundDiv.className = 'round';
+            roundDiv.innerHTML = `
+                <h3>Round ${roundCount}</h3>
+                <div class="input-group">
+                    <label>Score:</label>
+                    <input type="number" name="scores" required>
+                </div>
+                <div class="input-group">
+                    <label>Par:</label>
+                    <input type="number" name="pars" required>
+                </div>
+                <div class="input-group">
+                    <label>Slope Rating:</label>
+                    <input type="number" name="slopes" min="55" max="155">
+                </div>
+            `;
+
+            container.appendChild(roundDiv);
+        }
+    </script>
 </body>
 </html>
