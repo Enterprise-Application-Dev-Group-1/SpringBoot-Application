@@ -2,46 +2,27 @@ package com.golfhandicapcalculator.enterprise.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "scores")
+@Setter
+@Getter
 public class Score {
-    @Setter
-    @Getter
-    private Long playerId;
-    private int score;
-    private int par;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long scoreId;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "player_id", nullable = false)
+    private Player player;
+    
+    @Column(nullable = false)
+    private int score;
+    
+    @Column(nullable = false)
+    private int par;
+    
+    @Column(nullable = false)
     private int slope;
-
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    public int getPar() {
-        return par;
-    }
-
-    public void setPar(int par) {
-        this.par = par;
-    }
-
-    public Long getScoreId() {
-        return scoreId;
-    }
-
-    public void setScoreId(Long scoreId) {
-        this.scoreId = scoreId;
-    }
-
-    public int getSlope() {
-        return slope;
-    }
-
-    public void setSlope(int slope) {
-        this.slope = slope;
-    }
 }

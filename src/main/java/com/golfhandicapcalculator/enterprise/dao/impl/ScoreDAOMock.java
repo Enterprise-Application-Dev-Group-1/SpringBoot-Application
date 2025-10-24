@@ -20,7 +20,10 @@ public class ScoreDAOMock implements IScoreDAO {
     public ScoreDAOMock() {
         Score s1 = new Score();
         s1.setScoreId(nextId++);
-        s1.setPlayerId(100L); // Link to Alice Jones
+        // Link to Alice Jones by creating a minimal Player placeholder with the same id
+        com.golfhandicapcalculator.enterprise.dto.Player p = new com.golfhandicapcalculator.enterprise.dto.Player();
+        p.setPlayerId(100L);
+        s1.setPlayer(p);
         s1.setScore(85);
         s1.setPar(72);
         s1.setSlope(120);
@@ -34,9 +37,11 @@ public class ScoreDAOMock implements IScoreDAO {
 
     @Override
     public List<Score> fetchScoresByPlayerId(Long playerId) {
-        // Simulate a database query by filtering the map
+        // Simulate a database query by filtering the map; use the Player association
         return scoreTable.values().stream()
-                .filter(s -> s.getPlayerId().equals(playerId))
+                .filter(s -> s.getPlayer() != null
+                        && s.getPlayer().getPlayerId() != null
+                        && s.getPlayer().getPlayerId().equals(playerId))
                 .collect(Collectors.toList());
     }
 
@@ -62,7 +67,9 @@ public class ScoreDAOMock implements IScoreDAO {
     @Override
     public void deleteScoresByPlayerId(Long playerId) {
         // Remove all scores linked to the player
-        scoreTable.values().removeIf(score -> score.getPlayerId().equals(playerId));
+        scoreTable.values().removeIf(score -> score.getPlayer() != null
+                && score.getPlayer().getPlayerId() != null
+                && score.getPlayer().getPlayerId().equals(playerId));
         System.out.println("DAO Mock: Deleted all scores for Player " + playerId);
     }
 }

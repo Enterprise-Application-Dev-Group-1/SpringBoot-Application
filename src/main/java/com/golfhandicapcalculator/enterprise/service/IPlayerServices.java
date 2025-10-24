@@ -4,7 +4,6 @@ import com.golfhandicapcalculator.enterprise.dto.Player;
 import com.golfhandicapcalculator.enterprise.dto.Score;
 
 import java.util.List;
-import java.io.IOException;
 
 public interface IPlayerServices {
 
@@ -20,7 +19,7 @@ public interface IPlayerServices {
 
     List<Score> getPlayerScores(Long playerId);
 
-    Score addScoreToPlayer(Long playerId, Score score) throws IOException;
+    Score addScoreToPlayer(Long playerId, Score score);
 
-    Score updatePlayerScore(Long playerId, Long scoreId, Score score) throws IOException;
+    Score updatePlayerScore(Long playerId, Long scoreId, Score score);
 }
