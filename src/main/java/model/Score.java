@@ -1,4 +1,4 @@
-package com.golfhandicapcalculator.enterprise;
+package model;
 
 public class Score {
     private final int scoreId;

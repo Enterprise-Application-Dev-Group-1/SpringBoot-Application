@@ -1,4 +1,4 @@
-package com.golfhandicapcalculator.enterprise;
+package model;
 
 public class Player {
     private final int playerId;

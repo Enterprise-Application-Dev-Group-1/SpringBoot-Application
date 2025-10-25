@@ -1,6 +1,8 @@
 package com.golfhandicapcalculator.enterprise;
 
 
+import model.Player;
+import model.Score;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
