@@ -9,6 +9,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class GolfHandicapController {
 
+    private final ExternalFeedService externalFeedService;
+
+    public GolfHandicapController(ExternalFeedService externalFeedService) {
+        this.externalFeedService = externalFeedService;
+    }
+
+
     @GetMapping("/golf-handicap")
     public String showForm() {
         return "golf-handicap"; // This must match the HTML file name in /templates
@@ -30,6 +37,17 @@ public class GolfHandicapController {
 
         double handicap = total / 10.0;
         model.addAttribute("handicap", String.format("%.2f", handicap));
+        return "golf-handicap";
+    }
+
+    @GetMapping("/consume-feed")
+    public String consumeFeed(Model model) {
+        try {
+            String json = externalFeedService.getExternalFeed();
+            model.addAttribute("feedData", json);
+        } catch (Exception e) {
+            model.addAttribute("error", "Error fetching external feed: " + e.getMessage());
+        }
         return "golf-handicap";
     }
 }
