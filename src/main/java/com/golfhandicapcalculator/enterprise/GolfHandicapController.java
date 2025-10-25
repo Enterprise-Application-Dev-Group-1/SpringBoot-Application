@@ -50,4 +50,18 @@ public class GolfHandicapController {
         }
         return "golf-handicap";
     }
+
+    @PostMapping("/add-player")
+    public String addPlayer(@RequestParam("name") String name,
+                            @RequestParam("handicap") double handicap,
+                            Model model) {
+        try {
+            externalFeedService.savePlayer(name, handicap);
+            model.addAttribute("message", "Player added successfully.");
+        } catch (Exception e) {
+            model.addAttribute("error", "Failed to add player: " + e.getMessage());
+        }
+        return "add-player";
+    }
+
 }

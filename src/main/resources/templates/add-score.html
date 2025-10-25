@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Score</title>
+</head>
+<body>
+<h1>Add Score for Player</h1>
+<form action="/add-score" method="post">
+    <label for="playerId">Player ID:</label>
+    <input type="number" id="playerId" name="playerId" required><br><br>
+
+    <label for="score">Score:</label>
+    <input type="number" id="score" name="score" required><br><br>
+
+    <label for="par">Par:</label>
+    <input type="number" id="par" name="par" required><br><br>
+
+    <label for="slope">Slope:</label>
+    <input type="number" id="slope" name="slope" required><br><br>
+
+    <button type="submit">Submit Score</button>
+</form>
+
+<p th:if="${message != null}" th:text="${message}"></p>
+</body>
+</html>
