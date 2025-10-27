@@ -6,44 +6,54 @@
     <link rel="stylesheet" href="/golf-handicap.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Golf Handicap Calculator</h1>
-        <form action="/calculate-handicap" method="post">
-            <label>Enter your last 20 outing scores:</label><br>
-            <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                <div>
-                    <label>Scores</label><br>
-                    <input type="number" name="scores" min="1" max="200" required><br>
-                    <input type="number" name="scores" min="1" max="200" required><br>
-                    <input type="number" name="scores" min="1" max="200" required><br>
-                    <input type="number" name="scores" min="1" max="200" required><br>
-                    <input type="number" name="scores" min="1" max="200" required><br>
-                    <input type="number" name="scores" min="1" max="200" required><br>
-                    <input type="number" name="scores" min="1" max="200" required><br>
-                    <input type="number" name="scores" min="1" max="200" required><br>
-                    <input type="number" name="scores" min="1" max="200" required><br>
-                    <input type="number" name="scores" min="1" max="200" required><br>
-                </div>
-                <div>
-                    <label>Course Pars</label><br>
-                    <input type="number" name="pars" min="1" max="100" required><br>
-                    <input type="number" name="pars" min="1" max="100" required><br>
-                    <input type="number" name="pars" min="1" max="100" required><br>
-                    <input type="number" name="pars" min="1" max="100" required><br>
-                    <input type="number" name="pars" min="1" max="100" required><br>
-                    <input type="number" name="pars" min="1" max="100" required><br>
-                    <input type="number" name="pars" min="1" max="100" required><br>
-                    <input type="number" name="pars" min="1" max="100" required><br>
-                    <input type="number" name="pars" min="1" max="100" required><br>
-                    <input type="number" name="pars" min="1" max="100" required><br>
-                </div>
+<!-- Navigation Bar -->
+<nav>
+    <ul style="list-style-type: none; display: flex; justify-content: space-around; background-color: #333; padding: 10px;">
+        <li><a href="/add-player" style="color: white; text-decoration: none;">Add Player</a></li>
+        <li><a href="/add-scores" style="color: white; text-decoration: none;">Add Scores</a></li>
+        <li><a href="/player-scores" style="color: white; text-decoration: none;">Player Scores</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+    <h1>Golf Handicap Calculator</h1>
+    <form action="/calculate-handicap" method="post">
+        <label>Enter your last 20 outing scores:</label><br>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+            <div>
+                <label>Scores</label><br>
+                <input type="number" name="scores" min="1" max="200" required><br>
+                <input type="number" name="scores" min="1" max="200" required><br>
+                <input type="number" name="scores" min="1" max="200" required><br>
+                <input type="number" name="scores" min="1" max="200" required><br>
+                <input type="number" name="scores" min="1" max="200" required><br>
+                <input type="number" name="scores" min="1" max="200" required><br>
+                <input type="number" name="scores" min="1" max="200" required><br>
+                <input type="number" name="scores" min="1" max="200" required><br>
+                <input type="number" name="scores" min="1" max="200" required><br>
+                <input type="number" name="scores" min="1" max="200" required><br>
             </div>
-            <button type="submit" style="margin-top:20px;">Calculate Handicap</button>
-        </form>
-        <div class="result">
-            <!-- Result will be displayed here -->
-            <p th:if="${handicap != null}">Your calculated handicap: <span th:text="${handicap}"></span></p>
+            <div>
+                <label>Course Pars</label><br>
+                <input type="number" name="pars" min="1" max="100" required><br>
+                <input type="number" name="pars" min="1" max="100" required><br>
+                <input type="number" name="pars" min="1" max="100" required><br>
+                <input type="number" name="pars" min="1" max="100" required><br>
+                <input type="number" name="pars" min="1" max="100" required><br>
+                <input type="number" name="pars" min="1" max="100" required><br>
+                <input type="number" name="pars" min="1" max="100" required><br>
+                <input type="number" name="pars" min="1" max="100" required><br>
+                <input type="number" name="pars" min="1" max="100" required><br>
+                <input type="number" name="pars" min="1" max="100" required><br>
+            </div>
         </div>
+        <button type="submit" style="margin-top:20px;">Calculate Handicap</button>
+    </form>
+    <div class="result">
+        <!-- Result will be displayed here if handicap is calculated -->
+        <p th:if="${handicap != null}">Your calculated handicap: <span th:text="${handicap}"></span></p>
+        <p th:if="${handicap == null}">Please enter your scores to calculate your handicap.</p>
     </div>
+</div>
 </body>
 </html>
