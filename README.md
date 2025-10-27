@@ -151,13 +151,19 @@ https://github.com/orgs/Enterprise-Application-Dev-Group-1/projects/1/views/1
 ## Milestones
 
 [Milestone 1](https://github.com/Enterprise-Application-Dev-Group-1/SpringBoot-Application/milestone/1)
-[Milestone 2](https://google.com)
+[Milestone 2](https://github.com/orgs/Enterprise-Application-Dev-Group-1/projects/3)
 [Milestone 3](https://google.com)
 [Milestone 4](https://google.com)
 
+## How To Run Application
+- Copy down the repo and open it in intelij IDEA
+- Install docker desktop on windows/macos machine
+- Copy the contents of database_docker_run.sh and run it in the docker desktop terminal
+- Run the EnterpriseApplication file in InteliJ
+- Access the web GUI from http://localhost:8080
 
 ## Standup
 
 [We meet 8:00 PM Eastern on Sundays](https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fl%2Fmeetup-join%2F19%3Ameeting_YTE0YTVmNTAtODVkYS00MDBmLTk5YWMtMjUxNTllMDRiY2Zh%40thread.v2%2F0%3Fcontext%3D%257b%2522Tid%2522%253a%2522f5222e6c-5fc6-48eb-8f03-73db18203b63%2522%252c%2522Oid%2522%253a%2522e3dd5340-4b1b-4344-8d9c-b206108a8a64%2522%257d%26anon%3Dtrue&type=meetup-join&deeplinkId=0be347a4-9a73-4f0f-956f-6f5c9cfd85e1&directDl=true&msLaunch=true&enableMobilePage=true&suppressPrompt=true)
 Also we meet on Thursdays at 5:00pm.
-  - Meeting 1 September 18, 5:00pm. 
+  - Meeting 1 September 18, 5:00pm.
