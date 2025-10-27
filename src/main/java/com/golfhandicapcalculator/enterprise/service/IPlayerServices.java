@@ -20,7 +20,7 @@ public interface IPlayerServices {
 
     List<Score> getPlayerScores(Long playerId);
 
-    Score addScoreToPlayer(Long playerId, Score score) throws IOException;
+    Score addScoreToPlayer(Long playerId, Score score);
 
-    Score updatePlayerScore(Long playerId, Long scoreId, Score score) throws IOException;
+    Score updatePlayerScore(Long playerId, Long scoreId, Score score);
 }

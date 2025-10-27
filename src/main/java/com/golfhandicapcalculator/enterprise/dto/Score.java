@@ -1,47 +1,42 @@
 package com.golfhandicapcalculator.enterprise.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "scores")
+@Getter
+@Setter
 public class Score {
-    @Setter
-    @Getter
-    private Long playerId;
-    private int score;
-    private int par;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long scoreId;
+
+    @Column(nullable = false)
+    private int score;
+
+    @Column(nullable = false)
+    private int par;
+
+    @Column(nullable = false)
     private int slope;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "player_id", nullable = false)
+    @JsonIgnore
+    private Player player;
 
-    public int getScore() {
-        return score;
+    @Transient
+    public Long getPlayerId() {
+        return player != null ? player.getPlayerId() : null;
     }
 
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    public int getPar() {
-        return par;
-    }
-
-    public void setPar(int par) {
-        this.par = par;
-    }
-
-    public Long getScoreId() {
-        return scoreId;
-    }
-
-    public void setScoreId(Long scoreId) {
-        this.scoreId = scoreId;
-    }
-
-    public int getSlope() {
-        return slope;
-    }
-
-    public void setSlope(int slope) {
-        this.slope = slope;
+    public void setPlayerId(Long playerId) {
+        if (this.player == null) {
+            this.player = new Player();
+        }
+        this.player.setPlayerId(playerId);
     }
 }
