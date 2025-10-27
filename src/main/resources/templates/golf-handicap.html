@@ -35,6 +35,12 @@
             <h2>Your Handicap Index:</h2>
             <p class="handicap-value" th:text="${handicap}"></p>
         </div>
+        <button type="submit" style="margin-top:20px;">Calculate Handicap</button>
+    </form>
+    <div class="result">
+        <!-- Result will be displayed here if handicap is calculated -->
+        <p th:if="${handicap != null}">Your calculated handicap: <span th:text="${handicap}"></span></p>
+        <p th:if="${handicap == null}">Please enter your scores to calculate your handicap.</p>
     </div>
 
     <script>

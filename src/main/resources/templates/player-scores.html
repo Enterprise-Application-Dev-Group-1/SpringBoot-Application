@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Player Scores</title>
+</head>
+<body>
+<h1>Player Scores</h1>
+<form action="/player-scores" method="get">
+    <label for="playerId">Enter Player ID:</label>
+    <input type="number" id="playerId" name="playerId" required>
+    <button type="submit">Get Scores</button>
+</form>
+
+<div th:if="${scores != null}">
+    <h2>Scores for Player ID: <span th:text="${playerId}"></span></h2>
+    <table border="1">
+        <tr>
+            <th>Score ID</th>
+            <th>Score</th>
+            <th>Par</th>
+            <th>Slope</th>
+        </tr>
+        <tr th:each="score : ${scores}">
+            <td th:text="${score.scoreId}"></td>
+            <td th:text="${score.score}"></td>
+            <td th:text="${score.par}"></td>
+            <td th:text="${score.slope}"></td>
+        </tr>
+    </table>
+    <p><strong>Handicap:</strong> <span th:text="${handicap}"></span></p>
+</div>
+
+<p th:if="${error != null}" style="color:red;" th:text="${error}"></p>
+</body>
+</html>
