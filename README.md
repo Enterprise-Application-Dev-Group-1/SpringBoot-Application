@@ -64,7 +64,7 @@ The following images for the storyboard can be changed over time to satisfy the 
 
 ## Buisness Logic
 
-![Golf Handicap Calculator USGA](https://github.com/Enterprise-Application-Dev-Group-1/SpringBoot-Application/blob/main/image.png)
+![Golf Handicap Calculator USGA](https://github.com/Enterprise-Application-Dev-Group-1/SpringBoot-Application/blob/main/github_files/image.png)
 
 This table provides the logic behind calculating handicap based on the USGA Rules.
 
@@ -88,7 +88,7 @@ Score Differential = ((strokes - par) * 113)/course_slope
 
 ## Class Diagram
 
-![Golf Handicap Calculator Class Diagram](https://github.com/Enterprise-Application-Dev-Group-1/SpringBoot-Application/blob/main/GolfHandicapClassDiagram.drawio.png)
+![Golf Handicap Calculator Class Diagram](https://github.com/Enterprise-Application-Dev-Group-1/SpringBoot-Application/blob/main/github_files/GolfHandicapClassDiagram.drawio.png)
 
 ### Class Diagram Description
 - **EnterpriseApplication**  
