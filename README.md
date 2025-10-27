@@ -156,7 +156,7 @@ https://github.com/orgs/Enterprise-Application-Dev-Group-1/projects/1/views/1
 [Milestone 4](https://google.com)
 
 ## How To Run Application
-- Copy down the repo and open it in intelij IDEA
+- Copy down the repo and open it in IntelliJ IDEA
 - Install docker desktop on windows/macos machine
 - Copy the contents of database_docker_run.sh and run it in the docker desktop terminal
 - Run the EnterpriseApplication file in InteliJ
