@@ -1,13 +1,15 @@
-package com.golfhandicapcalculator.enterprise.service;
+package com.golfhandicapcalculator.enterprise.service.impl;
 
 import com.golfhandicapcalculator.enterprise.GolfHandicapCalculator;
 import com.golfhandicapcalculator.enterprise.dto.Score;
+import com.golfhandicapcalculator.enterprise.service.IHandicapService;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class HandicapService {
+public class HandicapService implements IHandicapService{
     private final GolfHandicapCalculator calculator;
 
     public HandicapService(GolfHandicapCalculator calculator) {
