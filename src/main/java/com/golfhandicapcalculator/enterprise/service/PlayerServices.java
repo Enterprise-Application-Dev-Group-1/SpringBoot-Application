@@ -13,11 +13,11 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.util.List;
 
 @Service
 @CacheConfig(cacheNames = {"player", "handicap"})
+@Transactional(readOnly = true)
 public class PlayerServices implements IPlayerServices {
 
     private final IPlayerDAO playerDAO;
@@ -31,70 +31,57 @@ public class PlayerServices implements IPlayerServices {
 
     @Override
     public List<Player> getAllPlayers() {
-        return playerDAO.fetchAllPlayers();  // Keep the existing method name
+        return playerDAO.fetchAllPlayers();
     }
 
     @Override
-    @Cacheable(cacheNames = "player", key = "#playerId")
-    @Transactional(readOnly = true)
+    @Cacheable(key = "#playerId")
     public Player getPlayerById(Long playerId) {
-        return playerDAO.fetchPlayer(playerId);  // Keep the existing method name
+        return playerDAO.fetchPlayer(playerId);
     }
 
     @Override
     @Transactional
-    @CachePut(cacheNames = "player", key = "#result.id")
+    @CachePut(key = "#result.playerId")
     public Player createPlayer(Player player) {
-        return playerDAO.savePlayer(player);  // Keep the existing method name
+        return playerDAO.savePlayer(player);
     }
 
     @Override
     @Transactional
-    @CachePut(cacheNames = "player", key = "#player.id")  // Use player's ID for cache key
+    @CachePut(key = "#playerId")
     public Player updatePlayer(Long playerId, Player player) {
-        return playerDAO.updatePlayer(player);  // Keep the existing method name
+        player.setPlayerId(playerId);
+        return playerDAO.updatePlayer(player);
     }
-
-    @Cacheable(cacheNames = "handicap", key = "#playerId")
-    @Transactional(readOnly = true)
-    public double getPlayerHandicap(Long playerId) {
-        // Fetch the Player object first
-        Player player = playerDAO.fetchPlayer(playerId);
-
-        // Ensure the player is not null and return the handicap
-        if (player != null) {
-            return player.getHandicap();  // Assuming the Player object has a 'getHandicap()' method
-        }
-
-        // Optionally, handle the case where the player is not found
-        throw new IllegalArgumentException("Player not found with ID: " + playerId);
-    }
-
 
     @Override
     @Transactional
-    @CacheEvict(cacheNames = "player", key = "#playerId")
+    @CacheEvict(key = "#playerId")
     public void deletePlayer(Long playerId) {
-        playerDAO.deletePlayer(playerId);  // No changes needed here
+        playerDAO.deletePlayer(playerId);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<Score> getPlayerScores(Long playerId) {
-        return scoreDAO.fetchScoresByPlayerId(playerId);  // Keep the existing method name
+        return scoreDAO.fetchScoresByPlayerId(playerId);
     }
 
     @Override
     @Transactional
-    @CacheEvict(cacheNames = "player", key = "#playerId")
-    public Score addScoreToPlayer(Long playerId, Score score) throws IOException {
-        return scoreDAO.saveScore(score);  // Keep the existing method name
+    @CacheEvict(key = "#playerId")
+    public Score addScoreToPlayer(Long playerId, Score score) {
+        score.setPlayerId(playerId);
+        return scoreDAO.saveScore(score);
     }
 
     @Override
     @Transactional
-    @CacheEvict(cacheNames = "player", key = "#playerId")
-    public Score updatePlayerScore(Long playerId, Long scoreId, Score score) throws IOException {
-        return scoreDAO.updateScore(score);  // Keep the existing method name
+    @CacheEvict(key = "#playerId")
+    public Score updatePlayerScore(Long playerId, Long scoreId, Score score) {
+        score.setPlayerId(playerId);
+        score.setScoreId(scoreId);
+        return scoreDAO.updateScore(score);
     }
+
 }
