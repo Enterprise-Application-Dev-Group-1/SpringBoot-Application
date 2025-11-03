@@ -18,7 +18,6 @@ import java.util.List;
 
 @Service
 @CacheConfig(cacheNames = {"player", "handicap"})
-@Transactional(readOnly = true)
 public class PlayerServices implements IPlayerServices {
 
     private final IPlayerDAO playerDAO;
@@ -32,59 +31,70 @@ public class PlayerServices implements IPlayerServices {
 
     @Override
     public List<Player> getAllPlayers() {
-        return playerDAO.getAllPlayers();
+        return playerDAO.fetchAllPlayers();  // Keep the existing method name
     }
 
     @Override
-    @Cacheable(key = "#playerId")
-    public Player getPlayerById(Long playerId) throws IOException {
-        return playerDAO.getPlayerById(playerId);
+    @Cacheable(cacheNames = "player", key = "#playerId")
+    @Transactional(readOnly = true)
+    public Player getPlayerById(Long playerId) {
+        return playerDAO.fetchPlayer(playerId);  // Keep the existing method name
     }
 
     @Override
     @Transactional
-    @CachePut(key = "#result.id")
+    @CachePut(cacheNames = "player", key = "#result.id")
     public Player createPlayer(Player player) {
-        return playerDAO.createPlayer(player);
+        return playerDAO.savePlayer(player);  // Keep the existing method name
     }
 
     @Override
     @Transactional
-    @CachePut(key = "#playerId")
+    @CachePut(cacheNames = "player", key = "#player.id")  // Use player's ID for cache key
     public Player updatePlayer(Long playerId, Player player) {
-        return playerDAO.updatePlayer(playerId, player);
+        return playerDAO.updatePlayer(player);  // Keep the existing method name
     }
 
-    @Override
     @Cacheable(cacheNames = "handicap", key = "#playerId")
+    @Transactional(readOnly = true)
     public double getPlayerHandicap(Long playerId) {
-        return playerDAO.getHandicap(playerId);
+        // Fetch the Player object first
+        Player player = playerDAO.fetchPlayer(playerId);
+
+        // Ensure the player is not null and return the handicap
+        if (player != null) {
+            return player.getHandicap();  // Assuming the Player object has a 'getHandicap()' method
+        }
+
+        // Optionally, handle the case where the player is not found
+        throw new IllegalArgumentException("Player not found with ID: " + playerId);
     }
+
 
     @Override
     @Transactional
-    @CacheEvict(key = "#playerId")
+    @CacheEvict(cacheNames = "player", key = "#playerId")
     public void deletePlayer(Long playerId) {
-        playerDAO.deletePlayer(playerId);
+        playerDAO.deletePlayer(playerId);  // No changes needed here
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Score> getPlayerScores(Long playerId) {
-        return scoreDAO.getScoresByPlayerId(playerId);
+        return scoreDAO.fetchScoresByPlayerId(playerId);  // Keep the existing method name
     }
 
     @Override
     @Transactional
-    @CacheEvict(key = "#playerId")
+    @CacheEvict(cacheNames = "player", key = "#playerId")
     public Score addScoreToPlayer(Long playerId, Score score) throws IOException {
-        return scoreDAO.addScoreToPlayer(playerId, score);
+        return scoreDAO.saveScore(score);  // Keep the existing method name
     }
 
     @Override
     @Transactional
-    @CacheEvict(key = "#playerId")
+    @CacheEvict(cacheNames = "player", key = "#playerId")
     public Score updatePlayerScore(Long playerId, Long scoreId, Score score) throws IOException {
-        return scoreDAO.updatePlayerScore(playerId, scoreId, score);
+        return scoreDAO.updateScore(score);  // Keep the existing method name
     }
-
 }
