@@ -88,7 +88,7 @@ Score Differential = ((strokes - par) * 113)/course_slope
 
 ## Class Diagram
 
-![Golf Handicap Calculator Class Diagram](https://github.com/Enterprise-Application-Dev-Group-1/SpringBoot-Application/blob/main/github_files/GolfHandicapClassDiagram.drawio.png)
+![Golf Handicap Calculator Class Diagram](https://github.com/Enterprise-Application-Dev-Group-1/SpringBoot-Application/blob/main/github_files/plant_uml.png)
 
 ### Class Diagram Description
 - **EnterpriseApplication**  
