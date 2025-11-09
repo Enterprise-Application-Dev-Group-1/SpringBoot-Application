@@ -25,10 +25,10 @@ public class GolfHandicapController {
         this.playerServices = playerServices;
     }
 
-    @GetMapping("/golf-handicap")
-    public String showForm() {
-        return "golf-handicap";
-    }
+//    @GetMapping("/golf-handicap")
+//    public String showForm() {
+//        return "golf-handicap";
+//    }
 
     @PostMapping("/calculate-handicap")
     public String calculateHandicap(@RequestParam("scores") double[] scores,
