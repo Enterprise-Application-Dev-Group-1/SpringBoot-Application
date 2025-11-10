@@ -1,15 +1,13 @@
 package com.golfhandicapcalculator.enterprise.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "players")
-@Setter
-@Getter
+@Data
 public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

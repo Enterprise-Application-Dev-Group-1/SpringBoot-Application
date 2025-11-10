@@ -1,14 +1,12 @@
 package com.golfhandicapcalculator.enterprise.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "scores")
-@Getter
-@Setter
+@Data
 public class Score {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -3,6 +3,7 @@ package com.golfhandicapcalculator.enterprise;
 import com.golfhandicapcalculator.enterprise.dto.Player;
 import com.golfhandicapcalculator.enterprise.dto.Score;
 import com.golfhandicapcalculator.enterprise.service.IPlayerServices;
+import com.golfhandicapcalculator.enterprise.service.IHandicapService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,12 +17,11 @@ import java.util.List;
 @RequestMapping("/api")
 public class GolfHandicapController {
 
-    private final GolfHandicapCalculator calculator;
+    private final IHandicapService handicapService;
     private final IPlayerServices playerServices;
-
-    @Autowired
-    public GolfHandicapController(GolfHandicapCalculator calculator, IPlayerServices playerServices) {
-        this.calculator = calculator;
+ 
+    public GolfHandicapController(IHandicapService handicapService, IPlayerServices playerServices) {
+        this.handicapService = handicapService;
         this.playerServices = playerServices;
     }
 
@@ -35,7 +35,7 @@ public class GolfHandicapController {
                                     @RequestParam("pars") double[] pars,
                                     @RequestParam(value = "slopes", required = false) double[] slopes,
                                     Model model) {
-        Double handicap = calculator.calculateHandicap(scores, pars, slopes);
+        double handicap = handicapService.calculateHandicap(scores, pars, slopes);
         model.addAttribute("handicap", handicap);
         return "golf-handicap";
     }
