@@ -135,7 +135,8 @@ Score Differential = ((strokes - par) * 113)/course_slope
 
 ## Team Members and Roles
 
-UI Specialist: Nirupama Poojari
+UI Specialist: Craig Blanding
+Software Developer: Nirupama Poojari
 Business Logic/Persistence: Nick Turner
 DevOps/Product Owner/Scrum Master/Github Admin: Aiden Hartranft
 Backend/Persistence: Craig Blanding
