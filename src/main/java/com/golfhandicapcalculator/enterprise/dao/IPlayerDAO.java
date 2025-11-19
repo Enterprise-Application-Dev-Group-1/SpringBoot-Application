@@ -1,9 +1,7 @@
 package com.golfhandicapcalculator.enterprise.dao;
 
 import com.golfhandicapcalculator.enterprise.dto.Player;
-
 import java.util.List;
-
 
 public interface IPlayerDAO {
     List<Player> fetchAllPlayers();

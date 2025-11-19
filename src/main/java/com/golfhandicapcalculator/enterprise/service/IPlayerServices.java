@@ -2,9 +2,7 @@ package com.golfhandicapcalculator.enterprise.service;
 
 import com.golfhandicapcalculator.enterprise.dto.Player;
 import com.golfhandicapcalculator.enterprise.dto.Score;
-
 import java.util.List;
-import java.io.IOException;
 
 public interface IPlayerServices {
 

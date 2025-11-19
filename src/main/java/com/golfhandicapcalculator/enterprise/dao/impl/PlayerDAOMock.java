@@ -3,20 +3,17 @@ package com.golfhandicapcalculator.enterprise.dao.impl;
 import com.golfhandicapcalculator.enterprise.dao.IPlayerDAO;
 import com.golfhandicapcalculator.enterprise.dto.Player;
 import org.springframework.stereotype.Repository;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Repository // Marks this class as a Spring repository/DAO
+@Repository
 public class PlayerDAOMock implements IPlayerDAO {
 
-    // Mock database table: Map<PlayerId, PlayerObject>
     private final Map<Long, Player> playerTable = new HashMap<>();
-    private Long nextId = 100L; // Starting ID for mock data
+    private Long nextId = 100L;
 
-    // Constructor to seed mock data
     public PlayerDAOMock() {
         Player p1 = new Player();
         p1.setPlayerId(nextId++);
@@ -37,7 +34,6 @@ public class PlayerDAOMock implements IPlayerDAO {
 
     @Override
     public Player savePlayer(Player player) {
-        // Simulates DB generating a new ID
         if (player.getPlayerId() == null || player.getPlayerId() == 0) {
             player.setPlayerId(nextId++);
         }
@@ -51,7 +47,7 @@ public class PlayerDAOMock implements IPlayerDAO {
             playerTable.put(player.getPlayerId(), player);
             return player;
         }
-        return null; // Simulate record not found
+        return null;
     }
 
     @Override

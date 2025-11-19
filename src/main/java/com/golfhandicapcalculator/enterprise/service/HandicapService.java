@@ -3,11 +3,11 @@ package com.golfhandicapcalculator.enterprise.service;
 import com.golfhandicapcalculator.enterprise.GolfHandicapCalculator;
 import com.golfhandicapcalculator.enterprise.dto.Score;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
 public class HandicapService {
+
     private final GolfHandicapCalculator calculator;
 
     public HandicapService(GolfHandicapCalculator calculator) {

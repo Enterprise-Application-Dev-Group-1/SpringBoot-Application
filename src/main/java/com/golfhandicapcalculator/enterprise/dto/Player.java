@@ -11,6 +11,7 @@ import java.util.List;
 @Setter
 @Getter
 public class Player {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long playerId;
