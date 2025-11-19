@@ -1,6 +1,5 @@
-/* Reset & Base Styles */
 body {
-    font-family: "Poppins", Arial, sans-serif;
+    font-family: Poppins, Arial, sans-serif;
     background: linear-gradient(135deg, #89CFF0, #c2ffff);
     margin: 0;
     padding: 0;
@@ -11,17 +10,16 @@ body {
 }
 
 .container {
-    background: #ffffff;
+    background: #fff;
     margin: 50px 0;
     padding: 40px 30px;
     border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 20px rgb(0 0 0 / 10%);
     max-width: 700px;
     width: 90%;
 }
 
 h1 {
-    text-align: center;
     color: #2c3e50;
     font-weight: 700;
     margin-bottom: 10px;
@@ -36,7 +34,6 @@ h1 {
 
 .inputs-grid {
     display: flex;
-    justify-content: space-between;
     gap: 30px;
     flex-wrap: wrap;
 }
@@ -60,8 +57,8 @@ h1 {
     gap: 10px;
 }
 
-input[type="number"] {
-
+input[type="number"],
+input[type="text"] {
     padding: 10px;
     border: 1.5px solid #ccc;
     border-radius: 6px;
@@ -69,14 +66,15 @@ input[type="number"] {
     font-size: 15px;
 }
 
-input[type="number"]:focus {
+input:focus {
     border-color: #89CFF0;
     outline: none;
-    box-shadow: 0 0 4px rgba(39, 174, 96, 0.4);
+    box-shadow: 0 0 4px rgb(39 174 96 / 40%);
 }
 
 button {
     width: 100%;
+    margin-top: 25px;
     padding: 12px;
     background: #89CFF0;
     color: #fff;
@@ -85,24 +83,104 @@ button {
     font-size: 17px;
     font-weight: 600;
     cursor: pointer;
-    margin-top: 25px;
     transition: all 0.3s ease;
 }
 
 button:hover {
-    background: #89CFF0;
     transform: translateY(-1px);
-    opacity: 80%;
+    opacity: 0.8;
+}
+
+.result,
+.message,
+.handicap-result {
+    text-align: center;
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: 600;
 }
 
 .result {
-    margin-top: 25px;
-    text-align: center;
-    font-size: 20px;
-    font-weight: 600;
-    color: #ffffff;
     background: #89CFF0;
-    border: 1px solid #b7e4b7;
-    border-radius: 8px;
+    color: #fff;
+    font-size: 20px;
+}
+
+.message,
+.handicap-result {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+}
+
+.handicap-result {
+    font-size: 18px;
+}
+
+.error {
+    color: #721c24;
     padding: 15px;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.nav-links {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.nav-links a {
+    margin-right: 15px;
+    text-decoration: none;
+    color: #2c3e50;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #89CFF0;
+    text-decoration: underline;
+}
+
+form {
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #89CFF0;
+    color: white;
+    font-weight: 600;
+}
+
+tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+label {
+    display: inline-block;
+    width: 150px;
+    margin-top: 10px;
 }
