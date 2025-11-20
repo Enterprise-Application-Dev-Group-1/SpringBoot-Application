@@ -1,36 +1,51 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Player Scores</title>
+    <link rel="stylesheet" href="/golf-handicap.css">
 </head>
+
 <body>
-<h1>Player Scores</h1>
-<form action="/player-scores" method="get">
-    <label for="playerId">Enter Player ID:</label>
-    <input type="number" id="playerId" name="playerId" required>
-    <button type="submit">Get Scores</button>
-</form>
+    <div class="container">
+        <div class="nav-links">
+            <a href="/golf-handicap">Home</a>
+            <a href="/add-player">Add Player</a>
+            <a href="/add-score">Add Score</a>
+            <a href="/player-scores">View Player Scores</a>
+        </div>
 
-<div th:if="${scores != null}">
-    <h2>Scores for Player ID: <span th:text="${playerId}"></span></h2>
-    <table border="1">
-        <tr>
-            <th>Score ID</th>
-            <th>Score</th>
-            <th>Par</th>
-            <th>Slope</th>
-        </tr>
-        <tr th:each="score : ${scores}">
-            <td th:text="${score.scoreId}"></td>
-            <td th:text="${score.score}"></td>
-            <td th:text="${score.par}"></td>
-            <td th:text="${score.slope}"></td>
-        </tr>
-    </table>
-    <p><strong>Handicap:</strong> <span th:text="${handicap}"></span></p>
-</div>
+        <h1>🏌️‍♂️ Player Scores</h1>
+        <form action="/player-scores" method="get">
+            <label for="playerId">Enter Player ID:</label>
+            <input type="number" id="playerId" name="playerId" required>
+            <button type="submit">Get Scores</button>
+        </form>
 
-<p th:if="${error != null}" style="color:red;" th:text="${error}"></p>
+        <div th:if="${scores != null}">
+            <h2>Scores for Player ID: <span th:text="${playerId}"></span></h2>
+            <table>
+                <tr>
+                    <th>Score ID</th>
+                    <th>Score</th>
+                    <th>Par</th>
+                    <th>Slope</th>
+                </tr>
+                <tr th:each="score : ${scores}">
+                    <td th:text="${score.scoreId}"></td>
+                    <td th:text="${score.score}"></td>
+                    <td th:text="${score.par}"></td>
+                    <td th:text="${score.slope}"></td>
+                </tr>
+            </table>
+            <div class="handicap-result">
+                <strong>Handicap:</strong> <span th:text="${handicap}"></span>
+            </div>
+        </div>
+
+        <p class="error" th:if="${error != null}" th:text="${error}"></p>
+    </div>
 </body>
+
 </html>

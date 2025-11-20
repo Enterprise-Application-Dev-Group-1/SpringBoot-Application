@@ -1,85 +1,186 @@
+body {
+    font-family: Poppins, Arial, sans-serif;
+    background: linear-gradient(135deg, #89CFF0, #c2ffff);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
 .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
+    background: #fff;
+    margin: 50px 0;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgb(0 0 0 / 10%);
+    max-width: 700px;
+    width: 90%;
 }
 
 h1 {
     color: #2c3e50;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.description {
     text-align: center;
-    margin-bottom: 30px;
+    color: #555;
+    font-size: 15px;
+    margin-bottom: 25px;
 }
 
-.handicap-form {
-    background-color: #f8f9fa;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+.inputs-grid {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
 }
 
-.round {
-    background-color: white;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 4px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+.input-column {
+    flex: 1;
 }
 
-.round h3 {
-    color: #34495e;
-    margin-top: 0;
-    margin-bottom: 15px;
-}
-
-.input-group {
-    margin-bottom: 15px;
-}
-
-.input-group label {
-    display: inline-block;
-    width: 100px;
-    color: #7f8c8d;
-}
-
-.input-group input {
-    width: 120px;
+.input-column h3 {
+    text-align: center;
+    background: #89CFF0;
+    color: white;
     padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.input-list {
+    display: grid;
+    gap: 10px;
+}
+
+input[type="number"],
+input[type="text"] {
+    padding: 10px;
+    border: 1.5px solid #ccc;
+    border-radius: 6px;
+    transition: all 0.3s;
+    font-size: 15px;
+}
+
+input:focus {
+    border-color: #89CFF0;
+    outline: none;
+    box-shadow: 0 0 4px rgb(39 174 96 / 40%);
 }
 
 button {
-    display: block;
-    width: 200px;
-    margin: 20px auto;
-    padding: 10px;
+    width: 100%;
+    margin-top: 25px;
+    padding: 12px;
+    background: #89CFF0;
+    color: #fff;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: 600;
     cursor: pointer;
-    font-size: 16px;
+    transition: all 0.3s ease;
 }
 
-.btn-add {
-    background-color: #3498db;
-    color: white;
+button:hover {
+    transform: translateY(-1px);
+    opacity: 0.8;
 }
 
-.btn-calculate {
-    background-color: #2ecc71;
-    color: white;
+.result,
+.message,
+.handicap-result {
+    text-align: center;
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: 600;
 }
 
 .result {
-    text-align: center;
-    margin-top: 30px;
-    padding: 20px;
-    background-color: #e8f6f3;
-    border-radius: 8px;
+    background: #89CFF0;
+    color: #fff;
+    font-size: 20px;
 }
 
-.handicap-value {
-    font-size: 24px;
-    color: #16a085;
-    font-weight: bold;
+.message,
+.handicap-result {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+}
+
+.handicap-result {
+    font-size: 18px;
+}
+
+.error {
+    color: #721c24;
+    padding: 15px;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.nav-links {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.nav-links a {
+    margin-right: 15px;
+    text-decoration: none;
+    color: #2c3e50;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #89CFF0;
+    text-decoration: underline;
+}
+
+form {
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #89CFF0;
+    color: white;
+    font-weight: 600;
+}
+
+tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+label {
+    display: inline-block;
+    width: 150px;
+    margin-top: 10px;
 }

@@ -1,73 +1,65 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title>Golf Handicap Calculator</title>
-    <link rel="stylesheet" th:href="@{/static/golf-handicap.css}">
+    <link rel="stylesheet" href="/golf-handicap.css">
 </head>
+
 <body>
     <div class="container">
-        <h1>Golf Handicap Calculator</h1>
+        <div class="nav-links">
+            <a href="/golf-handicap">Home</a>
+            <a href="/add-player">Add Player</a>
+            <a href="/add-score">Add Score</a>
+            <a href="/player-scores">View Player Scores</a>
+        </div>
+        <h1>🏌️‍♂️ Golf Handicap Calculator</h1>
+        <form action="/calculate-handicap" method="post">
+            <p class="description">Enter your last 10 outing scores and course pars below to estimate your handicap.</p>
 
-        <form th:action="@{/api/calculate-handicap}" method="post" class="handicap-form">
-            <div class="round-inputs" id="roundInputs">
-                <div class="round">
-                    <h3>Round 1</h3>
-                    <div class="input-group">
-                        <label>Score:</label>
-                        <input type="number" name="scores" required>
+            <div class="inputs-grid">
+                <div class="input-column">
+                    <h3>Scores</h3>
+                    <div class="input-list">
+                        <input type="number" name="scores" min="1" max="200" required>
+                        <input type="number" name="scores" min="1" max="200" required>
+                        <input type="number" name="scores" min="1" max="200" required>
+                        <input type="number" name="scores" min="1" max="200" required>
+                        <input type="number" name="scores" min="1" max="200" required>
+                        <input type="number" name="scores" min="1" max="200" required>
+                        <input type="number" name="scores" min="1" max="200" required>
+                        <input type="number" name="scores" min="1" max="200" required>
+                        <input type="number" name="scores" min="1" max="200" required>
+                        <input type="number" name="scores" min="1" max="200" required>
                     </div>
-                    <div class="input-group">
-                        <label>Par:</label>
-                        <input type="number" name="pars" required>
-                    </div>
-                    <div class="input-group">
-                        <label>Slope Rating:</label>
-                        <input type="number" name="slopes" min="55" max="155">
+                </div>
+                <div class="input-column">
+                    <h3>Course Pars</h3>
+                    <div class="input-list">
+                        <input type="number" name="pars" min="1" max="100" required>
+                        <input type="number" name="pars" min="1" max="100" required>
+                        <input type="number" name="pars" min="1" max="100" required>
+                        <input type="number" name="pars" min="1" max="100" required>
+                        <input type="number" name="pars" min="1" max="100" required>
+                        <input type="number" name="pars" min="1" max="100" required>
+                        <input type="number" name="pars" min="1" max="100" required>
+                        <input type="number" name="pars" min="1" max="100" required>
+                        <input type="number" name="pars" min="1" max="100" required>
+                        <input type="number" name="pars" min="1" max="100" required>
                     </div>
                 </div>
             </div>
 
-            <button type="button" onclick="addRound()" class="btn-add">Add Another Round</button>
-            <button type="submit" class="btn-calculate">Calculate Handicap</button>
+            <button type="submit">Calculate Handicap</button>
         </form>
 
-        <div th:if="${handicap != null}" class="result">
-            <h2>Your Handicap Index:</h2>
-            <p class="handicap-value" th:text="${handicap}"></p>
+        <div class="result">
+            <p th:if="${handicap != null}">
+                Your calculated handicap: <span th:text="${handicap}"></span>
+            </p>
         </div>
-        <button type="submit" style="margin-top:20px;">Calculate Handicap</button>
-    </form>
-    <div class="result">
-        <!-- Result will be displayed here if handicap is calculated -->
-        <p th:if="${handicap != null}">Your calculated handicap: <span th:text="${handicap}"></span></p>
-        <p th:if="${handicap == null}">Please enter your scores to calculate your handicap.</p>
     </div>
-
-    <script>
-        function addRound() {
-            const container = document.getElementById('roundInputs');
-            const roundCount = container.children.length + 1;
-
-            const roundDiv = document.createElement('div');
-            roundDiv.className = 'round';
-            roundDiv.innerHTML = `
-                <h3>Round ${roundCount}</h3>
-                <div class="input-group">
-                    <label>Score:</label>
-                    <input type="number" name="scores" required>
-                </div>
-                <div class="input-group">
-                    <label>Par:</label>
-                    <input type="number" name="pars" required>
-                </div>
-                <div class="input-group">
-                    <label>Slope Rating:</label>
-                    <input type="number" name="slopes" min="55" max="155">
-                </div>
-            `;
-
-            container.appendChild(roundDiv);
-        }
-    </script>
 </body>
+
 </html>

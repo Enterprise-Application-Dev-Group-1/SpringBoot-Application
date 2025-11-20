@@ -23,6 +23,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/api")
+@CrossOrigin(origins = "*")
 public class GolfHandicapController {
 
     private final GolfHandicapCalculator calculator;
@@ -172,8 +173,8 @@ public class GolfHandicapController {
     @PutMapping("/players/{playerId}/scores/{scoreId}")
     @ResponseBody
     public ResponseEntity<Score> updateScore(@PathVariable Long playerId,
-                                             @PathVariable Long scoreId,
-                                             @RequestBody Score score) {
+                                           @PathVariable Long scoreId,
+                                           @RequestBody Score score) {
         return ResponseEntity.ok(playerServices.updatePlayerScore(playerId, scoreId, score));
     }
 }
