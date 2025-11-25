@@ -3,6 +3,7 @@ package com.golfhandicapcalculator.enterprise;
 import com.golfhandicapcalculator.enterprise.dto.Player;
 import com.golfhandicapcalculator.enterprise.dto.Score;
 import com.golfhandicapcalculator.enterprise.service.IPlayerServices;
+import com.golfhandicapcalculator.enterprise.service.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,7 @@ public class GolfHandicapController {
 
     private final GolfHandicapCalculator calculator;
     private final IPlayerServices playerServices;
+    private final WeatherService weatherService;
 
     /**
      * Constructs a new GolfHandicapController with the specified calculator and player services.
@@ -37,9 +39,12 @@ public class GolfHandicapController {
      */
 
     @Autowired
-    public GolfHandicapController(GolfHandicapCalculator calculator, IPlayerServices playerServices) {
+    public GolfHandicapController(GolfHandicapCalculator calculator,
+                                  IPlayerServices playerServices,
+                                  WeatherService weatherService) {
         this.calculator = calculator;
         this.playerServices = playerServices;
+        this.weatherService = weatherService;
     }
 
     /**
@@ -176,5 +181,11 @@ public class GolfHandicapController {
                                            @PathVariable Long scoreId,
                                            @RequestBody Score score) {
         return ResponseEntity.ok(playerServices.updatePlayerScore(playerId, scoreId, score));
+    }
+
+    @GetMapping("/weather")
+    @ResponseBody
+    public ResponseEntity<String> getWeather(@RequestParam String lat, @RequestParam String lon) {
+        return ResponseEntity.ok(weatherService.getWeather(lat, lon));
     }
 }
