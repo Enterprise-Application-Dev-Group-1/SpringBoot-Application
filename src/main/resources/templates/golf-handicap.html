@@ -14,6 +14,41 @@
             <a href="/add-score">Add Score</a>
             <a href="/player-scores">View Player Scores</a>
         </div>
+
+        <div class="weather-widget">
+            <h3>⛅ Course Weather</h3>
+            <p id="weather-info">Loading...</p>
+            <button onclick="refreshWeather()">Refresh Weather</button>
+        </div>
+
+        <script>
+            function updateWeather(latitude, longitude) {
+                fetch(`/api/weather?lat=${latitude}&lon=${longitude}`)
+                    .then(response => response.text())
+                    .then(data => document.getElementById('weather-info').textContent = data)
+                    .catch(() => document.getElementById('weather-info').textContent = 'Weather unavailable');
+            }
+
+            function refreshWeather() {
+                if (navigator.geolocation) {
+                    document.getElementById('weather-info').textContent = 'Getting location...';
+                    navigator.geolocation.getCurrentPosition(
+                        position => {
+                            updateWeather(position.coords.latitude, position.coords.longitude);
+                        },
+                        error => {
+                            document.getElementById('weather-info').textContent = 'Location access denied';
+                        }
+                    );
+                } else {
+                    document.getElementById('weather-info').textContent = 'Geolocation not supported';
+                }
+            }
+
+            // Automatically load weather on page load
+            refreshWeather();
+        </script>
+
         <h1>🏌️‍♂️ Golf Handicap Calculator</h1>
         <form action="/calculate-handicap" method="post">
             <p class="description">Enter your last 10 outing scores and course pars below to estimate your handicap.</p>
