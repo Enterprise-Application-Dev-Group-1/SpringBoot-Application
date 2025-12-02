@@ -31,26 +31,13 @@ public class WebController {
     private GolfHandicapCalculator calculator;
 
     /**
-     * Displays the sign-in page (landing page) for the application.
-     * Maps both root URL ("/") and "/sign-in" to the sign-in page.
+     * Redirects the root URL to the golf handicap calculator.
      *
-     * @return the name of the view for the sign-in page ("sign-in")
-     */
-
-    @GetMapping({"/", "/sign-in"})
-    public String showSignIn() {
-        return "sign-in";
-    }
-
-    /**
-     * Handles sign-in form submission and redirects to the golf handicap calculator.
-     *
-     * @param username the username entered by the user (not persisted)
      * @return a redirect to the "/golf-handicap" page
      */
 
-    @PostMapping("/sign-in")
-    public String signIn(@RequestParam String username) {
+    @GetMapping("/")
+    public String redirectToCalculator() {
         return "redirect:/golf-handicap";
     }
 
