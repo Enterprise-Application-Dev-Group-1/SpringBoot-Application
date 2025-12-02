@@ -28,7 +28,9 @@ public class GolfHandicapWebController {
     }
 
     @GetMapping("/golf-handicap")
-    public String showHomePage() {
+    public String home(Model model) {
+        List<Player> players = playerServices.getAllPlayers();
+        model.addAttribute("players", players);
         return "golf-handicap";
     }
 
