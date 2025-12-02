@@ -2,7 +2,6 @@ package com.golfhandicapcalculator.enterprise;
 
 import com.golfhandicapcalculator.enterprise.dto.Player;
 import com.golfhandicapcalculator.enterprise.dto.Score;
-import com.golfhandicapcalculator.enterprise.service.HandicapService;
 import com.golfhandicapcalculator.enterprise.service.IPlayerServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,15 +15,17 @@ public class GolfHandicapWebController {
 
     private final GolfHandicapCalculator calculator;
     private final IPlayerServices playerServices;
-    private final HandicapService handicapService;
 
     @Autowired
     public GolfHandicapWebController(GolfHandicapCalculator calculator,
-                                     IPlayerServices playerServices,
-                                     HandicapService handicapService) {
+                                     IPlayerServices playerServices) {
         this.calculator = calculator;
         this.playerServices = playerServices;
-        this.handicapService = handicapService;
+    }
+
+    @GetMapping("/")
+    public String defaultRoute() {
+        return "redirect:/golf-handicap";
     }
 
     @GetMapping("/golf-handicap")
@@ -83,21 +84,5 @@ public class GolfHandicapWebController {
             model.addAttribute("message", "Error adding score: " + e.getMessage());
         }
         return "add-scores";
-    }
-
-    @GetMapping("/player-scores")
-    public String showPlayerScores(@RequestParam(required = false) Long playerId, Model model) {
-        if (playerId != null) {
-            try {
-                List<Score> scores = playerServices.getPlayerScores(playerId);
-                double handicap = handicapService.calculatePlayerHandicap(scores);
-                model.addAttribute("scores", scores);
-                model.addAttribute("playerId", playerId);
-                model.addAttribute("handicap", handicap);
-            } catch (Exception e) {
-                model.addAttribute("error", "Error retrieving scores: " + e.getMessage());
-            }
-        }
-        return "player-scores";
     }
 }
