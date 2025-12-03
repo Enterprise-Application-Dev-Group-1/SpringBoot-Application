@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Player</title>
+    <link rel="stylesheet" href="/golf-handicap.css">
+</head>
+<body>
+<div class="container">
+    <div class="nav-links">
+        <a href="/golf-handicap">Home</a>
+        <a href="/add-player">Add Player</a>
+        <a href="/add-score">Add Score</a>
+        <a href="/delete-player">Delete Player</a>
+    </div>
+
+    <h1>🗑️ Delete Player</h1>
+
+    <form action="/delete-player" method="post">
+        <label for="playerId">Player ID:</label>
+        <input type="number" id="playerId" name="playerId" required><br><br>
+
+        <button type="submit">Delete Player</button>
+    </form>
+
+    <div th:if="${message}" class="message" th:text="${message}"></div>
+</div>
+</body>
+</html>

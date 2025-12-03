@@ -1,3 +1,4 @@
+// language: java
 package com.golfhandicapcalculator.enterprise.service;
 
 import com.golfhandicapcalculator.enterprise.dao.IPlayerDAO;
@@ -20,11 +21,13 @@ public class PlayerServices implements IPlayerServices {
 
     private final IPlayerDAO playerDAO;
     private final IScoreDAO scoreDAO;
+    private final HandicapService handicapService;
 
     @Autowired
-    public PlayerServices(IPlayerDAO playerDAO, IScoreDAO scoreDAO) {
+    public PlayerServices(IPlayerDAO playerDAO, IScoreDAO scoreDAO, HandicapService handicapService) {
         this.playerDAO = playerDAO;
         this.scoreDAO = scoreDAO;
+        this.handicapService = handicapService;
     }
 
     @Override
@@ -42,7 +45,12 @@ public class PlayerServices implements IPlayerServices {
     @Transactional
     @CachePut(key = "#result.playerId")
     public Player createPlayer(Player player) {
-        return playerDAO.savePlayer(player);
+        Player saved = playerDAO.savePlayer(player);
+        // initialize handicap (usually 0 if no scores)
+        List<Score> scores = scoreDAO.fetchScoresByPlayerId(saved.getPlayerId());
+        double newHandicap = handicapService.calculatePlayerHandicap(scores);
+        playerDAO.updateHandicap(saved.getPlayerId(), newHandicap);
+        return saved;
     }
 
     @Override
@@ -57,6 +65,8 @@ public class PlayerServices implements IPlayerServices {
     @Transactional
     @CacheEvict(key = "#playerId")
     public void deletePlayer(Long playerId) {
+        // delete scores first to keep data consistent
+        scoreDAO.deleteScoresByPlayerId(playerId);
         playerDAO.deletePlayer(playerId);
     }
 
@@ -70,7 +80,12 @@ public class PlayerServices implements IPlayerServices {
     @CacheEvict(key = "#playerId")
     public Score addScoreToPlayer(Long playerId, Score score) {
         score.setPlayerId(playerId);
-        return scoreDAO.saveScore(score);
+        Score saved = scoreDAO.saveScore(score);
+        // Recalculate handicap and persist
+        List<Score> scores = scoreDAO.fetchScoresByPlayerId(playerId);
+        double newHandicap = handicapService.calculatePlayerHandicap(scores);
+        playerDAO.updateHandicap(playerId, newHandicap);
+        return saved;
     }
 
     @Override
@@ -79,6 +94,12 @@ public class PlayerServices implements IPlayerServices {
     public Score updatePlayerScore(Long playerId, Long scoreId, Score score) {
         score.setPlayerId(playerId);
         score.setScoreId(scoreId);
-        return scoreDAO.updateScore(score);
+        Score updated = scoreDAO.updateScore(score);
+        if (updated != null) {
+            List<Score> scores = scoreDAO.fetchScoresByPlayerId(playerId);
+            double newHandicap = handicapService.calculatePlayerHandicap(scores);
+            playerDAO.updateHandicap(playerId, newHandicap);
+        }
+        return updated;
     }
 }

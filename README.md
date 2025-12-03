@@ -188,7 +188,9 @@ https://github.com/orgs/Enterprise-Application-Dev-Group-1/projects/1/views/1
 ## How To Run Application
 - Copy down the repo and open it in IntelliJ IDEA
 - Install docker desktop on windows/macos machine
-- Run the docker-compose.yml file to start the database with ```docker compose up -d```
+- Use Java 11 or higher, most of this was built with Java 11 so that is recommended
+- Make sure you have Maven installed and setup in IntelliJ
+- Run the docker-compose.yml file to start the database with ```docker compose up -d``` with the terminal at the root of the project directory
 - Run the EnterpriseApplication file in InteliJ
 - Access the web GUI from http://localhost:8080/
 
