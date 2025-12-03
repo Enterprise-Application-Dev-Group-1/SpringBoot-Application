@@ -8,12 +8,21 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
+/**
+ * Mock implementation of the IScoreDAO interface for testing and development purposes.
+ * Uses an in-memory ConcurrentHashMap to store score data.
+ * This implementation is annotated with @Repository to be detected by Spring's component scanning.
+ */
 @Repository
 public class ScoreDAOMock implements IScoreDAO {
 
     private final Map<Long, Score> scoreTable = new ConcurrentHashMap<>();
     private Long nextId = 200L;
 
+    /**
+     * Constructs a new ScoreDAOMock instance and initializes it with sample data.
+     * Creates one default score entry with ID 200 for Player 100.
+     */
     public ScoreDAOMock() {
         Score s1 = new Score();
         s1.setScoreId(nextId++);
@@ -26,11 +35,23 @@ public class ScoreDAOMock implements IScoreDAO {
         scoreTable.put(s1.getScoreId(), s1);
     }
 
+    /**
+     * Fetches a score by its unique identifier.
+     *
+     * @param scoreId the unique identifier of the score to retrieve
+     * @return the Score object if found, null otherwise
+     */
     @Override
     public Score fetchScoreById(Long scoreId) {
         return scoreTable.get(scoreId);
     }
 
+    /**
+     * Fetches all scores associated with a specific player.
+     *
+     * @param playerId the unique identifier of the player
+     * @return a list of Score objects belonging to the specified player, empty list if none found
+     */
     @Override
     public List<Score> fetchScoresByPlayerId(Long playerId) {
         return scoreTable.values().stream()
@@ -40,6 +61,13 @@ public class ScoreDAOMock implements IScoreDAO {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Saves a new score to the data store.
+     * If the score does not have an ID or has ID 0, a new ID is assigned.
+     *
+     * @param score the Score object to save
+     * @return the saved Score object with its assigned ID
+     */
     @Override
     public Score saveScore(Score score) {
         if (score.getScoreId() == null || score.getScoreId() == 0) {
@@ -49,6 +77,12 @@ public class ScoreDAOMock implements IScoreDAO {
         return score;
     }
 
+    /**
+     * Updates an existing score in the data store.
+     *
+     * @param score the Score object with updated information
+     * @return the updated Score object if found and updated, null if the score ID does not exist
+     */
     @Override
     public Score updateScore(Score score) {
         if (scoreTable.containsKey(score.getScoreId())) {
@@ -58,6 +92,12 @@ public class ScoreDAOMock implements IScoreDAO {
         return null;
     }
 
+    /**
+     * Deletes all scores associated with a specific player.
+     * Prints a confirmation message to the console after deletion.
+     *
+     * @param playerId the unique identifier of the player whose scores should be deleted
+     */
     @Override
     public void deleteScoresByPlayerId(Long playerId) {
         scoreTable.values().removeIf(score -> score.getPlayer() != null

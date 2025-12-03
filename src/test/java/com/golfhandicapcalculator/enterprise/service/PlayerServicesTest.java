@@ -2,6 +2,7 @@ package com.golfhandicapcalculator.enterprise.service;
 
 import com.golfhandicapcalculator.enterprise.dao.IPlayerDAO;
 import com.golfhandicapcalculator.enterprise.dao.IScoreDAO;
+import com.golfhandicapcalculator.enterprise.service.HandicapService;
 import com.golfhandicapcalculator.enterprise.dto.Player;
 import com.golfhandicapcalculator.enterprise.dto.Score;
 import org.junit.Before;
@@ -27,11 +28,14 @@ public class PlayerServicesTest {
     @Mock
     private IScoreDAO scoreDAO;
 
+    @Mock
+    private HandicapService handicapService;
+
     private PlayerServices playerServices;
 
     @Before
     public void setUp() {
-        playerServices = new PlayerServices(playerDAO, scoreDAO);
+        playerServices = new PlayerServices(playerDAO, scoreDAO, handicapService);
     }
 
     // Player CRUD Tests

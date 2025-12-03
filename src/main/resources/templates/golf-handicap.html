@@ -7,94 +7,95 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="nav-links">
-            <a href="/golf-handicap">Home</a>
-            <a href="/add-player">Add Player</a>
-            <a href="/add-score">Add Score</a>
-            <a href="/player-scores">View Player Scores</a>
+<div class="container">
+    <div class="nav-links">
+        <a href="/golf-handicap">Home</a>
+        <a href="/add-player">Add Player</a>
+        <a href="/add-score">Add Score</a>
+        <a href="/delete-player">Delete Player</a>
+    </div>
+
+    <div class="weather-widget">
+        <h3>⛅ Course Weather</h3>
+        <p id="weather-info">Loading...</p>
+        <button onclick="refreshWeather()">Refresh Weather</button>
+    </div>
+
+    <script>
+        function updateWeather(latitude, longitude) {
+            fetch(`/api/weather?lat=${latitude}&lon=${longitude}`)
+                .then(response => response.text())
+                .then(data => document.getElementById('weather-info').textContent = data)
+                .catch(() => document.getElementById('weather-info').textContent = 'Weather unavailable');
+        }
+
+        function refreshWeather() {
+            if (navigator.geolocation) {
+                document.getElementById('weather-info').textContent = 'Getting location...';
+                navigator.geolocation.getCurrentPosition(
+                    position => {
+                        updateWeather(position.coords.latitude, position.coords.longitude);
+                    },
+                    error => {
+                        document.getElementById('weather-info').textContent = 'Location access denied';
+                    }
+                );
+            } else {
+                document.getElementById('weather-info').textContent = 'Geolocation not supported';
+            }
+        }
+
+        // Automatically load weather on page load
+        refreshWeather();
+    </script>
+
+    <h1>🏌️‍♂️ Golf Handicap Calculator - Home</h1>
+
+    <div class="players-section">
+        <h2>All Players</h2>
+
+        <div th:if="${players == null || players.isEmpty()}" class="no-data">
+            <p>No players found. <a href="/add-player">Add a player</a> to get started.</p>
         </div>
 
-        <div class="weather-widget">
-            <h3>⛅ Course Weather</h3>
-            <p id="weather-info">Loading...</p>
-            <button onclick="refreshWeather()">Refresh Weather</button>
-        </div>
-
-        <script>
-            function updateWeather(latitude, longitude) {
-                fetch(`/api/weather?lat=${latitude}&lon=${longitude}`)
-                    .then(response => response.text())
-                    .then(data => document.getElementById('weather-info').textContent = data)
-                    .catch(() => document.getElementById('weather-info').textContent = 'Weather unavailable');
-            }
-
-            function refreshWeather() {
-                if (navigator.geolocation) {
-                    document.getElementById('weather-info').textContent = 'Getting location...';
-                    navigator.geolocation.getCurrentPosition(
-                        position => {
-                            updateWeather(position.coords.latitude, position.coords.longitude);
-                        },
-                        error => {
-                            document.getElementById('weather-info').textContent = 'Location access denied';
-                        }
-                    );
-                } else {
-                    document.getElementById('weather-info').textContent = 'Geolocation not supported';
-                }
-            }
-
-            // Automatically load weather on page load
-            refreshWeather();
-        </script>
-
-        <h1>🏌️‍♂️ Golf Handicap Calculator</h1>
-        <form action="/calculate-handicap" method="post">
-            <p class="description">Enter your last 10 outing scores and course pars below to estimate your handicap.</p>
-
-            <div class="inputs-grid">
-                <div class="input-column">
-                    <h3>Scores</h3>
-                    <div class="input-list">
-                        <input type="number" name="scores" min="1" max="200" required>
-                        <input type="number" name="scores" min="1" max="200" required>
-                        <input type="number" name="scores" min="1" max="200" required>
-                        <input type="number" name="scores" min="1" max="200" required>
-                        <input type="number" name="scores" min="1" max="200" required>
-                        <input type="number" name="scores" min="1" max="200" required>
-                        <input type="number" name="scores" min="1" max="200" required>
-                        <input type="number" name="scores" min="1" max="200" required>
-                        <input type="number" name="scores" min="1" max="200" required>
-                        <input type="number" name="scores" min="1" max="200" required>
-                    </div>
+        <div th:if="${players != null && !players.isEmpty()}" class="players-list">
+            <div th:each="player : ${players}" class="player-card">
+                <div class="player-header">
+                    <h3 th:text="${player.name}">Player Name</h3>
+                    <span class="player-id">ID: <span th:text="${player.playerId}"></span></span>
+                    <span class="player-handicap">Handicap: <span th:text="${player.handicap}"></span></span>
                 </div>
-                <div class="input-column">
-                    <h3>Course Pars</h3>
-                    <div class="input-list">
-                        <input type="number" name="pars" min="1" max="100" required>
-                        <input type="number" name="pars" min="1" max="100" required>
-                        <input type="number" name="pars" min="1" max="100" required>
-                        <input type="number" name="pars" min="1" max="100" required>
-                        <input type="number" name="pars" min="1" max="100" required>
-                        <input type="number" name="pars" min="1" max="100" required>
-                        <input type="number" name="pars" min="1" max="100" required>
-                        <input type="number" name="pars" min="1" max="100" required>
-                        <input type="number" name="pars" min="1" max="100" required>
-                        <input type="number" name="pars" min="1" max="100" required>
+
+                <details class="scores-dropdown">
+                    <summary>View Scores (<span th:text="${player.scores.size()}"></span>)</summary>
+                    <div th:if="${player.scores.isEmpty()}" class="no-scores">
+                        No scores recorded yet.
                     </div>
-                </div>
+                    <table th:if="${!player.scores.isEmpty()}" class="scores-table">
+                        <thead>
+                        <tr>
+                            <th>Score ID</th>
+                            <th>Score</th>
+                            <th>Par</th>
+                            <th>Slope</th>
+                            <th>Differential</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="score : ${player.scores}">
+                            <td th:text="${score.scoreId}"></td>
+                            <td th:text="${score.score}"></td>
+                            <td th:text="${score.par}"></td>
+                            <td th:text="${score.slope}"></td>
+                            <td th:text="${#numbers.formatDecimal((score.score - score.par) * 113.0 / score.slope, 1, 2)}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </details>
             </div>
-
-            <button type="submit">Calculate Handicap</button>
-        </form>
-
-        <div class="result">
-            <p th:if="${handicap != null}">
-                Your calculated handicap: <span th:text="${handicap}"></span>
-            </p>
         </div>
     </div>
+</div>
 </body>
 
 </html>
